@@ -3994,7 +3994,7 @@ void printPlatformDevices(const struct platform_list *plist, cl_uint p,
 
 		if (output->json) {
 			if (!output->brief) printf(" }");
-		} else if (output->detailed && d < pdata[p].ndevs - 1)
+		} else if (output->detailed && d < ndevs - 1)
 			puts("");
 
 
