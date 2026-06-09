@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>clinfo 测试使用说明</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 2px solid #4CAF50;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #444;
+            margin-top: 30px;
+        }
+        h3 {
+            color: #555;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            background-color: white;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #4CAF50;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        code {
+            background-color: #e8e8e8;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+        }
+        pre {
+            background-color: #2d2d2d;
+            color: #f8f8f2;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            font-family: 'Courier New', monospace;
+        }
+        .note {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+        .tip {
+            background-color: #d4edda;
+            border-left: 4px solid #28a745;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+        .warning {
+            background-color: #f8d7da;
+            border-left: 4px solid #dc3545;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+        .section {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        ul, ol {
+            padding-left: 25px;
+        }
+        li {
+            margin: 8px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1>clinfo 测试使用说明</h1>
+
+    <div class="section">
+        <h2>概述</h2>
+        <p>本目录包含为 Android 和 Linux ARM 平台预编译的 clinfo 二进制文件。clinfo 是一个用于显示系统 OpenCL 平台和设备信息的命令行工具。</p>
+    </div>
+
+    <div class="section">
+        <h2>文件列表</h2>
+        <table>
+            <tr>
+                <th>文件名</th>
+                <th>平台</th>
+                <th>架构</th>
+                <th>说明</th>
+            </tr>
+            <tr>
+                <td><code>clinfo-linux-arm32</code></td>
+                <td>Linux</td>
+                <td>ARM32 (armhf)</td>
+                <td>适用于 32 位 ARM Linux 系统</td>
+            </tr>
+            <tr>
+                <td><code>clinfo-linux-arm64</code></td>
+                <td>Linux</td>
+                <td>ARM64 (aarch64)</td>
+                <td>适用于 64 位 ARM Linux 系统</td>
+            </tr>
+            <tr>
+                <td><code>clinfo-android-arm32</code></td>
+                <td>Android</td>
+                <td>ARM32 (armeabi-v7a)</td>
+                <td>适用于 32 位 Android 设备</td>
+            </tr>
+            <tr>
+                <td><code>clinfo-android-arm64</code></td>
+                <td>Android</td>
+                <td>ARM64 (arm64-v8a)</td>
+                <td>适用于 64 位 Android 设备</td>
+            </tr>
+        </table>
+    </div>
+
+    <div class="section">
+        <h2>依赖库说明</h2>
+
+        <h3>Android 平台</h3>
+        <p>Android 设备上的 OpenCL 实现通常由 GPU 驱动提供，依赖库文件位于以下位置：</p>
+        <ul>
+            <li><strong>32 位设备</strong>: <code>/vendor/lib/egl/libGLES_mali.so</code></li>
+            <li><strong>64 位设备</strong>: <code>/vendor/lib64/egl/libGLES_mali.so</code></li>
+        </ul>
+        <div class="note">
+            <strong>注意：</strong> 某些设备可能使用其他路径，如：
+            <ul>
+                <li><code>/system/vendor/lib/egl/libGLES_mali.so</code></li>
+                <li><code>/system/vendor/lib64/egl/libGLES_mali.so</code></li>
+            </ul>
+        </div>
+
+        <h3>Linux 平台</h3>
+        <p>Linux ARM 设备上的 OpenCL 实现通常由 Mali 驱动提供，依赖库文件可能位于以下位置：</p>
+        <ul>
+            <li><code>/lib/libmali.so</code> 或 <code>/lib64/libmali.so</code></li>
+            <li><code>/lib/libMali.so</code> 或 <code>/lib64/libMali.so</code></li>
+            <li><code>/usr/lib/libmali.so</code> 或 <code>/usr/lib64/libmali.so</code></li>
+            <li><code>/usr/lib/libMali.so</code> 或 <code>/usr/lib64/libMali.so</code></li>
+        </ul>
+    </div>
+
+    <div class="section">
+        <h2>使用方法</h2>
+
+        <h3>Linux 平台使用方法</h3>
+
+        <h4>方法一：直接运行（推荐）</h4>
+        <p>如果系统已正确配置 OpenCL ICD，可以直接运行：</p>
+        <pre># 添加执行权限
+chmod +x clinfo-linux-arm32  # 或 clinfo-linux-arm64
+
+# 运行
+./clinfo-linux-arm32         # 或 ./clinfo-linux-arm64</pre>
+
+        <h4>方法二：设置 LD_LIBRARY_PATH</h4>
+        <p>如果运行时找不到 OpenCL 库，需要设置 <code>LD_LIBRARY_PATH</code>：</p>
+        <pre># 32 位系统
+export LD_LIBRARY_PATH=/lib:/usr/lib:$LD_LIBRARY_PATH
+./clinfo-linux-arm32
+
+# 64 位系统
+export LD_LIBRARY_PATH=/lib64:/usr/lib64:$LD_LIBRARY_PATH
+./clinfo-linux-arm64</pre>
+
+        <h3>Android 平台使用方法</h3>
+
+        <h4>方法一：通过 ADB 运行</h4>
+        <pre># 推送二进制文件到设备
+adb push clinfo-android-arm64 /data/local/tmp/clinfo
+
+# 添加执行权限
+adb shell chmod +x /data/local/tmp/clinfo
+
+# 运行（需要设置 LD_LIBRARY_PATH）
+adb shell "LD_LIBRARY_PATH=/vendor/lib64:/vendor/lib64/egl:$LD_LIBRARY_PATH /data/local/tmp/clinfo"</pre>
+
+        <h4>方法二：32 位 Android 设备</h4>
+        <pre># 推送 32 位二进制文件
+adb push clinfo-android-arm32 /data/local/tmp/clinfo
+
+# 添加执行权限
+adb shell chmod +x /data/local/tmp/clinfo
+
+# 运行
+adb shell "LD_LIBRARY_PATH=/vendor/lib:/vendor/lib/egl:$LD_LIBRARY_PATH /data/local/tmp/clinfo"</pre>
+    </div>
+
+    <div class="section">
+        <h2>常用命令选项</h2>
+        <pre># 显示设备摘要列表
+./clinfo -l
+
+# 显示所有可用信息
+./clinfo -a
+
+# 尝试显示所有属性（即使平台不支持）
+./clinfo --all
+
+# 显示帮助信息
+./clinfo -h</pre>
+    </div>
+
+    <div class="section">
+        <h2>验证 OpenCL 环境</h2>
+        <p>运行 clinfo 可以帮助验证 OpenCL 环境是否正确配置：</p>
+        <ol>
+            <li><strong>成功输出</strong>: 显示平台和设备信息，说明 OpenCL 环境正常</li>
+            <li><strong>无输出或错误</strong>: 可能是 OpenCL 库未找到或未正确安装</li>
+            <li><strong>Segmentation fault</strong>: 可能是 OpenCL 驱动存在问题</li>
+        </ol>
+    </div>
+
+    <div class="section">
+        <h2>故障排除</h2>
+
+        <h3>问题 1: 找不到 libOpenCL.so</h3>
+        <div class="tip">
+            <strong>解决方案：</strong> 设置 <code>LD_LIBRARY_PATH</code> 指向包含 OpenCL 库的目录。
+            <pre>export LD_LIBRARY_PATH=/path/to/opencl/lib:$LD_LIBRARY_PATH</pre>
+        </div>
+
+        <h3>问题 2: Permission denied</h3>
+        <div class="tip">
+            <strong>解决方案：</strong> 确保文件有执行权限。
+            <pre>chmod +x clinfo-*</pre>
+        </div>
+
+        <h3>问题 3: No platforms found</h3>
+        <div class="tip">
+            <strong>解决方案：</strong>
+            <ul>
+                <li>检查 OpenCL ICD 配置文件是否存在 (<code>/etc/OpenCL/vendors/*.icd</code>)</li>
+                <li>确认 GPU 驱动已正确安装</li>
+                <li>验证设备支持 OpenCL</li>
+            </ul>
+        </div>
+
+        <h3>问题 4: Android 上无法执行</h3>
+        <div class="tip">
+            <strong>解决方案：</strong>
+            <ul>
+                <li>确保使用正确的架构版本（ARM32 或 ARM64）</li>
+                <li>检查 SELinux 设置</li>
+                <li>使用 <code>adb shell</code> 进入设备后手动运行</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="section">
+        <h2>输出示例</h2>
+        <p>成功运行后，clinfo 会输出类似以下的信息：</p>
+        <pre>Number of platforms                               1
+  Platform Name                                   ARM Platform
+  Platform Vendor                                 ARM
+  Platform Version                                OpenCL 2.0
+  Platform Profile                                FULL_PROFILE
+  Platform Extensions                             cl_khr_icd cl_khr_global_int32_base_atomics...
+
+  Platform Name                                   ARM Platform
+Number of devices                                 1
+  Device Name                                     Mali-G52
+  Device Vendor                                   ARM
+  Device Version                                  OpenCL 2.0
+  Driver Version                                  2.0
+  Device Type                                     GPU
+...</pre>
+    </div>
+
+    <div class="section">
+        <h2>相关链接</h2>
+        <ul>
+            <li><a href="https://github.com/Oblomov/clinfo">clinfo GitHub 仓库</a></li>
+            <li><a href="https://www.khronos.org/opencl/">Khronos OpenCL 官网</a></li>
+            <li><a href="https://developer.arm.com/tools-and-software/graphics-and-gaming/mali-gpu">ARM Mali GPU OpenCL</a></li>
+        </ul>
+    </div>
+</body>
+</html>
